@@ -1,0 +1,10 @@
+{
+  "project_dir_name": "demo-project",
+  "app_name": "demo-app",
+  "app_version": "0.0.1",
+  "db_name": "demo_db",
+  "db_host": "127.0.0.1:27017",
+  "db_max_conn_count": "10",
+  "db_min_conn_count": "3"
+}
+
