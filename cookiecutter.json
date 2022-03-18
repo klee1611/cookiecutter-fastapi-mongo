@@ -5,6 +5,7 @@
   "db_name": "demo_db",
   "db_host": "127.0.0.1:27017",
   "db_max_conn_count": "10",
-  "db_min_conn_count": "3"
+  "db_min_conn_count": "3",
+  "test_db_name": "test_demo_db"
 }
 

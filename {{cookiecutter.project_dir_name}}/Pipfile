@@ -13,6 +13,7 @@ uvicorn = "*"
 [dev-packages]
 pytest-asyncio = "*"
 mypy = "*"
+requests = "*"
 
 [requires]
 python_version = "3.10"
