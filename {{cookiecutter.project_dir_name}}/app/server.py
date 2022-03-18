@@ -8,6 +8,7 @@ import logging
 import logging.config
 
 from .routers import health
+from .routers.v1 import sample_resource as sample_resource_v1
 
 from .db.db import connect_and_init_db, close_db_connect
 from .error import BadRequest, UnprocessableError
@@ -93,4 +94,9 @@ app.include_router(
     health.router,
     prefix='/health',
     tags=["health"]
+)
+app.include_router(
+    sample_resource_v1.router,
+    prefix='/api/sample-resource-app/v1/sample-resource',
+    tags=["sample resource v1"]
 )

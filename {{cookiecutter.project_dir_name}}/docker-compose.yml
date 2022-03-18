@@ -1,0 +1,25 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: {{cookiecutter.app_name}}
+    ports:
+      - 8888:8888
+    environment:
+      - LOG_LEVEL=INFO
+      - MONGODB_URL=mongodb://mongodb/{{cookiecutter.db_name}}?readPreference=secondaryPreferred&connectTimeoutMS=4000&maxIdleTimeMS=90000&heartbeatFrequencyMS=12000&w=majority&wTimeoutMS=6000
+      - MONGODB_DBNAME={{cookiecutter.db_name}}
+      - MAX_CONNECTIONS_COUNT={{cookiecutter.db_max_conn_count}}
+      - MIN_CONNECTIONS_COUNT={{cookiecutter.db_min_conn_count}}
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:3.6
+    container_name: mongodb
+    volumes:
+      - /tmp/mongo:/data/db
+    ports:
+      - 27017:27017
