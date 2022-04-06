@@ -1,0 +1,36 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Lint
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v3
+      - name: Python setup
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.10"
+      - name: Install Flake8
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8
+      - name: Run Flake8
+        uses: suo/flake8-github-action@releases/v1
+        with:
+          checkName: 'lint'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
