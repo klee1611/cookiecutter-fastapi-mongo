@@ -1,22 +1,28 @@
 import pytest_asyncio
 from fastapi.testclient import TestClient
+import os
 
-from .mongo_util import MongoUtil
+from .mongo_client import MongoClient
 
 
 @pytest_asyncio.fixture()
-def test_client():
+def env_setup():
+    os.environ["MONGODB_DBNAME"] = os.environ.get("TEST_DB_NAME")
+    os.environ["MONGODB_URL"] = os.environ.get("TEST_MONGODB_URL")
+
+
+@pytest_asyncio.fixture()
+def test_client(env_setup):
     from app.server import app
     with TestClient(app) as test_client:
         yield test_client
 
 
-@pytest_asyncio.fixture(autouse=True)
-async def mock_data():
-    print('\033[92mSetup mock db\033[0m')
-    mock_db = MongoUtil()
-    yield mock_db
-
-    print('\033[92mTeardown drop db and close conn\033[0m')
-    await mock_db.drop_database()
-    mock_db.close_conn()
+@pytest_asyncio.fixture()
+async def mongo_client():
+    print('\033[92mSetting test db\033[0m')
+    with MongoClient(
+        os.environ.get("TEST_DB_NAME"),
+        'sample_resource'
+    ) as mongo_client:
+        yield mongo_client
