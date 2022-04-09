@@ -1,12 +1,16 @@
 from fastapi import APIRouter, Depends
 import logging
+from uuid import UUID
 
 from ...db.db import get_db, AsyncIOMotorClient
 from ...dao.sample_resource import create_sample_resource as \
-    db_create_sample_resouce
+    db_create_sample_resouce, get_sample_resource as \
+    db_get_sample_resource
+from ...util import uuid_masker
 
 from ...models.create_sample_resource import \
     CreateSampleResourceReq, CreateSampleResourceResp
+from ...models.get_sample_resource import GetSampleResourceResp
 
 router = APIRouter()
 
@@ -17,7 +21,7 @@ router = APIRouter()
                  400: {}
              }
              )
-async def create_account(
+async def create_sample_resource(
     sample_resource_data: CreateSampleResourceReq,
     db: AsyncIOMotorClient = Depends(get_db)
 ):
@@ -29,3 +33,25 @@ async def create_account(
     )
 
     return CreateSampleResourceResp(id=sample_resource_db.id)
+
+
+@router.get('/', include_in_schema=False, status_code=200)
+@router.get('', response_model=GetSampleResourceResp, status_code=200,
+            responses={
+                400: {}
+            }
+            )
+async def get_sample_resource(
+    resource: UUID,
+    db: AsyncIOMotorClient = Depends(get_db),
+):
+    logging.info(
+        f'Receive get sample resource {uuid_masker(resource)} request'
+    )
+
+    sample_resource = await db_get_sample_resource(
+        db,
+        resource
+    )
+
+    return GetSampleResourceResp(name=sample_resource.get("name"))
