@@ -19,9 +19,9 @@ def test_client(env_setup):
 
 
 @pytest_asyncio.fixture()
-async def mongo_client():
+async def mongo_client(env_setup):
     print('\033[92mSetting test db\033[0m')
-    with MongoClient(
+    async with MongoClient(
         os.environ.get("TEST_DB_NAME"),
         'sample_resource'
     ) as mongo_client:
