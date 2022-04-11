@@ -1,6 +1,7 @@
 from uuid import uuid4, UUID
 from datetime import datetime
 import logging
+from pymongo import ReturnDocument
 
 from ..conf.config import Config
 from ..db.db import AsyncIOMotorClient
@@ -44,4 +45,32 @@ async def get_sample_resource(
     )
     if None is sample_resource:
         logging.info(f"Resource {uuid_masker(resource_id)} is None")
+    return sample_resource
+
+
+async def update_sample_resource(
+    conn: AsyncIOMotorClient,
+    resource_id: UUID,
+    resource_data: dict
+) -> SampleResourceDB | None:
+    logging.info(
+        f'Updating sample resource {uuid_masker(str(resource_id))}...'
+    )
+    sample_resource = \
+        await conn[__db_name][__db_collection].find_one_and_update(
+            {'_id': resource_id},
+            {'$set': {
+                **resource_data,
+                "update_time": datetime.utcnow(),
+            }},
+            return_document=ReturnDocument.AFTER,
+        )
+    if None is sample_resource:
+        logging.error(
+            f"Sample resource {uuid_masker(str(resource_id))} not exist"
+        )
+    else:
+        logging.info(
+            f'Sample resource {uuid_masker(str(resource_id))} updated'
+        )
     return sample_resource

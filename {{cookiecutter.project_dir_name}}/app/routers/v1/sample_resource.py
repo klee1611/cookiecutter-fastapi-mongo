@@ -5,8 +5,10 @@ from uuid import UUID
 from ...db.db import get_db, AsyncIOMotorClient
 from ...dao.sample_resource import create_sample_resource as \
     db_create_sample_resouce, get_sample_resource as \
-    db_get_sample_resource
+    db_get_sample_resource, update_sample_resource as \
+    db_update_sample_resource
 from ...util import uuid_masker
+from ...error import UnprocessableError
 
 from ...models.create_sample_resource import \
     CreateSampleResourceReq, CreateSampleResourceResp
@@ -55,3 +57,29 @@ async def get_sample_resource(
     )
 
     return GetSampleResourceResp(name=sample_resource.get("name"))
+
+
+@router.put('/{resource_id}', include_in_schema=False, status_code=200)
+@router.put('/{resource_id}', status_code=200,
+            responses={
+                400: {}
+            }
+            )
+async def update_sample_resource(
+    resource_id: UUID,
+    sample_resource_data: CreateSampleResourceReq,
+    db: AsyncIOMotorClient = Depends(get_db),
+):
+    logging.info(
+        f'Receive update sample resource {uuid_masker(resource_id)} request'
+    )
+
+    sample_resource = await db_update_sample_resource(
+        db,
+        resource_id,
+        sample_resource_data.dict()
+    )
+    if None is sample_resource:
+        raise UnprocessableError([])
+
+    return {}
