@@ -9,6 +9,7 @@ from uuid import UUID
         ("5e8e793e-b7b6-4ad0-ba78-94445ef2a286", 'John Doe', 200),
         ("cef4485f-fed7-48e3-99c6-47da4c04a894", 'Jane Doe', 200),
         ("cddd67bf-48c0-4e4c-95c6-cec9ec1981b6", 'John Doe', 422),
+        ("c0a207d1-1734-4052-b127-4845eb9d40bb", 'John Doe', 422),
         ("5e8e793e-b7b6-4ad0-ba78-94445ef2a286", None, 400),
     ]
 )
