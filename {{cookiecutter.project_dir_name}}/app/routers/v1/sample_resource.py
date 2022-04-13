@@ -6,7 +6,8 @@ from ...db.db import get_db, AsyncIOMotorClient
 from ...dao.sample_resource import create_sample_resource as \
     db_create_sample_resouce, get_sample_resource as \
     db_get_sample_resource, update_sample_resource as \
-    db_update_sample_resource
+    db_update_sample_resource, delete_sample_resource as \
+    db_delete_sample_resource
 from ...util import uuid_masker
 from ...error import UnprocessableError
 
@@ -78,6 +79,30 @@ async def update_sample_resource(
         db,
         resource_id,
         sample_resource_data.dict()
+    )
+    if None is sample_resource:
+        raise UnprocessableError([])
+
+    return {}
+
+
+@router.delete('/{resource_id}', include_in_schema=False, status_code=200)
+@router.delete('/{resource_id}', status_code=200,
+               responses={
+                   400: {}
+               }
+               )
+async def delete_sample_resource(
+    resource_id: UUID,
+    db: AsyncIOMotorClient = Depends(get_db),
+):
+    logging.info(
+        f'Receive delete sample resource {uuid_masker(resource_id)} request'
+    )
+
+    sample_resource = await db_delete_sample_resource(
+        db,
+        resource_id,
     )
     if None is sample_resource:
         raise UnprocessableError([])

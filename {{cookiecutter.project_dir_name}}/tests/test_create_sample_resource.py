@@ -27,3 +27,4 @@ async def test_create_sample_resource(
         resource_id = resp.json().get('id')
         resource_db = await mongo_client.get_sample_resource(resource_id)
         assert resource_db.get('name') == name
+        assert False is resource_db.get('deleted')

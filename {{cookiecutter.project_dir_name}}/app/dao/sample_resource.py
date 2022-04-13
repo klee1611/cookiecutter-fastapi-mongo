@@ -16,12 +16,13 @@ __db_collection = 'sample_resource'
 async def create_sample_resource(
     conn: AsyncIOMotorClient,
     name: str
-):
+) -> SampleResourceDB:
     new_sample_resource = SampleResourceDB(
         id=uuid4(),
         name=name,
         create_time=datetime.utcnow(),
-        update_time=datetime.utcnow()
+        update_time=datetime.utcnow(),
+        deleted=False,
     )
     logging.info(
         f'Inserting sample resource {name} into db...'
@@ -41,7 +42,10 @@ async def get_sample_resource(
 ) -> SampleResourceDB | None:
     logging.info(f"Getting sample resource {uuid_masker(resource_id)}...")
     sample_resource = await conn[__db_name][__db_collection].find_one(
-        {'_id': resource_id},
+        {"$and": [
+            {'_id': resource_id},
+            {'deleted': False},
+        ]},
     )
     if None is sample_resource:
         logging.info(f"Resource {uuid_masker(resource_id)} is None")
@@ -58,7 +62,10 @@ async def update_sample_resource(
     )
     sample_resource = \
         await conn[__db_name][__db_collection].find_one_and_update(
-            {'_id': resource_id},
+            {"$and": [
+                {'_id': resource_id},
+                {'deleted': False},
+            ]},
             {'$set': {
                 **resource_data,
                 "update_time": datetime.utcnow(),
@@ -72,5 +79,37 @@ async def update_sample_resource(
     else:
         logging.info(
             f'Sample resource {uuid_masker(str(resource_id))} updated'
+        )
+    return sample_resource
+
+
+async def delete_sample_resource(
+    conn: AsyncIOMotorClient,
+    resource_id: UUID,
+) -> SampleResourceDB | None:
+    logging.info(
+        f"Deleting sample resource {uuid_masker(str(resource_id))}..."
+    )
+
+    sample_resource = await conn[__db_name][__db_collection].\
+        find_one_and_update(
+        {"$and": [
+            {'_id': resource_id},
+            {'deleted': False},
+        ]},
+        {'$set': {
+            "deleted": True,
+            "update_time": datetime.utcnow(),
+        }},
+        return_document=ReturnDocument.AFTER,
+    )
+
+    if None is sample_resource:
+        logging.error(
+            f"Sample resource {uuid_masker(str(resource_id))} not exist"
+        )
+    else:
+        logging.info(
+            f'Sample resource {uuid_masker(str(resource_id))} deleted'
         )
     return sample_resource

@@ -18,3 +18,4 @@ class SampleResourceDB(SampleResourceBase, MongoModel):
     id: UUID
     create_time: datetime
     update_time: datetime
+    deleted: bool
