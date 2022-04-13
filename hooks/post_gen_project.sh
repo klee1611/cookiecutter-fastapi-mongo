@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 cd {{cookiecutter.project_dir_name}}
-pipenv install --dev
+poetry install
 mv env.sample .env

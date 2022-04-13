@@ -2,7 +2,7 @@
 cd ..
 cookiecutter cookiecutter-fastapi-mongo --no-input
 cd demo-project
-pipenv run pytest -s -vv
-pipenv --rm
+env $(cat .env) poetry run pytest -s -vv
+poetry env remove python
 cd ..
 rm -rf demo-project
