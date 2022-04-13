@@ -9,6 +9,8 @@ from uuid import UUID
         ("5e8e793e-b7b6-4ad0-ba78-94445ef2a286", 200, "name A"),
         ("cef4485f-fed7-48e3-99c6-47da4c04a894", 200, "name B"),
         (None, 400, None),
+        ("76805766-c436-405f-beb2-735075124a6e", 204, None),
+        ("c0a207d1-1734-4052-b127-4845eb9d40bb", 204, None),
     ]
 )
 async def test_create_sample_resource(

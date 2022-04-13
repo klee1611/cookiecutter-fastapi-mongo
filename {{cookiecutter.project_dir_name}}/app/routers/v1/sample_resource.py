@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response
 import logging
 from uuid import UUID
 
@@ -56,6 +56,9 @@ async def get_sample_resource(
         db,
         resource
     )
+
+    if None is sample_resource:
+        return Response(status_code=204)
 
     return GetSampleResourceResp(name=sample_resource.get("name"))
 
