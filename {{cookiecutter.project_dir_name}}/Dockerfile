@@ -5,10 +5,11 @@ WORKDIR /server
 ENV PYTHONUNBUFFERED 1
 
 RUN pip install --upgrade pip
-RUN pip install pipenv
-COPY Pipfile* /tmp
-RUN cd /tmp && pipenv lock --keep-outdated --requirements > /server/requirements.txt
-RUN cd /server && pip install -r requirements.txt
+RUN pip install poetry
+COPY pyproject.toml poetry.lock /tmp
+RUN cd /tmp \
+        && poetry export -f requirements.txt -o requirements.txt \
+        && pip install -r requirements.txt
 
 COPY start.sh /server/
 COPY app /server/app
