@@ -45,7 +45,7 @@ Be careful of the `pip3` version.
 Then go to the directory where you want to place your project,  
 and create the new project with this template and `cookiecutter`:
 ```sh
-cookiecutter gh: klee1611/cookiecutter-fastapi-mongo
+cookiecutter gh:klee1611/cookiecutter-fastapi-mongo
 ```
 
 After the project folder is created,  
