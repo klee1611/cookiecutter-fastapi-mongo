@@ -1,4 +1,4 @@
-.PHONY: test-project-code
+.PHONY: test-server-code test-dev-run test-docker-compose
 
 test-server-code:
 	@cookiecutter . --no-input

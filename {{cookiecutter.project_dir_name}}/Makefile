@@ -1,4 +1,4 @@
-.PHONY: test
+.PHONY: test dev docker-build docker-compose-up docker-compose-down
 
 VERSION := {{cookiecutter.app_version}}
 IMAGE_NAME := {{cookiecutter.docker_image_name}}:$(VERSION)
