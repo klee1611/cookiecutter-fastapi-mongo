@@ -7,6 +7,7 @@
   "db_max_conn_count": "10",
   "db_min_conn_count": "3",
   "test_db_name": "test_demo_db",
-  "author": "default author"
+  "author": "default author",
+  "docker_image_name": "docker-demo-app"
 }
 

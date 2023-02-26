@@ -1,60 +1,79 @@
 # Backend FastAPI and MongoDB - Project Template
+![Python3.10](https://img.shields.io/badge/Python-3.10-brightgreen.svg?style=flat-square)
+![MongoDB](https://img.shields.io/badge/MongoDB-3.6-brightgreen.svg?style=flat-square)
 ![Lint](https://github.com/klee1611/cookiecutter-fastapi-mongo/actions/workflows/lint.yml/badge.svg)
 ![CI Tests](https://github.com/klee1611/cookiecutter-fastapi-mongo/actions/workflows/ci.yml/badge.svg)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
 
-A template to a high performance backend project using Python, FastAPI, and MongoDB,  
-with the API documentation.  
-The purpose of this template is to build a small, independent backend service for microservices architecture.  
+
+This is a backend boilerplate designed for high-performance RESTful APIs using FastAPI and Motor, an asynchronous driver for MongoDB. It includes a health API for service health checking, basic CRUD operations for a sample resource, Swagger API documentation, and Docker support. Additionally, this boilerplate uses Cookiecutter, allowing for easy creation of new backend services.
 
 ![api document screenshot](screenshot/api_document.png)
 
-# Features
-A project created by this template provides a high performance RESTful API for a sample resource,  
-with:
-* Basic CRUD operation with updating time record
-* API documentation with [Swagger UI](https://swagger.io/tools/swagger-ui/)
-* API testing
-* Proper logging with ID masking
-* Dockerfile and docker-compose support
+## Features
+A new backend project created with this boilerplate provides:
+- [x] Asynchronous high-performance RESTful APIs built upon [FastAPI](https://fastapi.tiangolo.com/) framework.
+- [x] Asynchronous CRUD operations for a sample resource built upon [Motor](https://motor.readthedocs.io/en/stable/) driver for MongoDB, providing high performance and efficiency.
+- [x] API documentation with [Swagger UI](https://swagger.io/tools/swagger-ui/).
+- [x] API testing with [pytest](https://docs.pytest.org/en/7.1.x/) and [pytest-asyncio](https://github.com/pytest-dev/pytest-asyncio).
+- [x] Dockerfile for containerization and docker-compose support.
+- [x] Easy creation of new backend services with [cookiecutter](https://github.com/cookiecutter/cookiecutter).
+- [x] Easy package menagement with [Poetry](https://python-poetry.org/).
+- [x] Health API for service health checking.
+- [x] Easy configuration with environment variables.
+- [x] Easy testing, develop running, docker build, docker-compose up and down with Makefile.
+- [x] Proper logging with ID masking.
 
-## Build Upon
-* [FastAPI](https://fastapi.tiangolo.com/) for asynchronous backend framework and API documentation.
-* [Motor](https://motor.readthedocs.io/en/stable/) for asynchronous MongoDB operations.
-* [pytest](https://docs.pytest.org/en/7.1.x/) and [pytest-asyncio](https://github.com/pytest-dev/pytest-asyncio) for API testing.
-* [Poetry](https://python-poetry.org/) for package management.
+## Prerequisites
+- Python 3.10+
+- [Poetry](https://python-poetry.org/) installed
+- [Cookiecutter](https://github.com/cookiecutter/cookiecutter) installed
+- Docker installed
+- GNU Make
 
-# Quick Start
-To use this template,  
-you don't have to fork this project,  
-just use [cookiecutter](https://github.com/cookiecutter/cookiecutter).  
+## Getting Started
 
-First,  
-install cookiecutter if you don't already have it:
-```sh
-pip3 install cookiecutter
-```
+### Create A New Service
+With [Cookiecutter](https://github.com/cookiecutter/cookiecutter),  
+you don't have to fork this project to create a new service.  
 
-and since this template uses `poetry` as the Python package manager,  
-install `poetry` before creating a project:
-```sh
-pip3 install poetry
-```
-Be careful of the `pip3` version.  
-`poetry` should be installed with `pip3` version above Python 3.10.  
+Go to the directory where you want to place your new backend project,  
+and create the new project with:
 
-Then go to the directory where you want to place your project,  
-and create the new project with this template and `cookiecutter`:
 ```sh
 cookiecutter gh:klee1611/cookiecutter-fastapi-mongo
 ```
 
 After the project folder is created,  
-the template will install all the packages required for development automatically.  
+all packages required will be installed automatically.  
 
-# Troubleshooting
-### Testing Failed with Wrong `pytest` Version
-Check the `pytest` version from the testing output.  
-If the `pytest` version is lower than `Python3.10`,  
-it might be caused by the `poetry` issue.  
+### Edit Environment Variables
+Edit the `.env` file within the project folder.
 
-Using `pip3` installed with Python3.10 or above to install `pip3` will solve this issue most likely.  
+### Run Tests
+```sh
+make test
+```
+
+### Build Docker Image
+```sh
+make docker-build
+```
+
+### Docker-compose
+```sh
+make docker-compose-up
+make docker-compose-down
+```
+
+### Run Service Locally
+```sh
+make dev
+```
+This will create a MongoDB container as well.
+
+### Check Swagger API Document
+Go to ` http://localhost:8888/docs`.
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you.
