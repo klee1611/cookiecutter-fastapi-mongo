@@ -1,5 +1,4 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-from pymongo import MongoClient
 import logging
 
 from ..conf.config import Config
@@ -26,6 +25,5 @@ async def connect_and_init_db():
 
 async def close_db_connect():
     logging.info('Closing connection to mongo...')
-    global db_client
     db_client.close()
     logging.info('Mongo connection closed.')
