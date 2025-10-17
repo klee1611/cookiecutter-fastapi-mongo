@@ -3,6 +3,7 @@ name = "{{cookiecutter.app_name}}"
 version = "{{cookiecutter.app_version}}"
 description = ""
 authors = ["{{cookiecutter.author}}"]
+packages = [{include = "app"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -12,7 +13,7 @@ gunicorn = "^20.1.0"
 PyYAML = "^6.0"
 uvicorn = "^0.17.6"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest-asyncio = "^0.18.3"
 mypy = "^0.942"
 requests = "^2.27.1"

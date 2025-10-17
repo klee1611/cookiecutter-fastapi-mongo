@@ -24,7 +24,7 @@ docker-build:
 	@docker build -t $(IMAGE_NAME) .
 
 docker-compose-up:
-	@docker-compose up -d --build --remove-orphans --force-recreate
+	@docker compose up -d --build --remove-orphans --force-recreate || docker-compose up -d --build --remove-orphans --force-recreate
 
 docker-compose-down:
-	@docker-compose down -v --remove-orphans --rmi all
+	@docker compose down -v --remove-orphans --rmi all || docker-compose down -v --remove-orphans --rmi all
