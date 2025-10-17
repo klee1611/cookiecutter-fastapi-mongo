@@ -11,6 +11,7 @@ test:
 		mongo:4.4
 	@env $(shell cat .env) poetry run pytest -s -vv
 	@docker stop mongodb
+	@docker run --rm -v $(shell pwd)/data:/data alpine sh -c "rm -rf /data/*" || true
 
 dev:
 	@docker run -itd --rm \
