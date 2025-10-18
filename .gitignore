@@ -1,2 +1,6 @@
 **/Pipfile.lock
 **/.DS_Store
+
+# Node modules
+node_modules/
+package-lock.json

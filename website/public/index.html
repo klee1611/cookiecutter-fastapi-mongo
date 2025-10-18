@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI MongoDB Template | Production-Ready Backend Boilerplate with Cookiecutter</title>
+    <meta name="description" content="Production-ready FastAPI and MongoDB cookiecutter template for building high-performance async RESTful APIs. Includes Docker, Poetry 2.2.1, pytest, and automatic Swagger documentation.">
+    <meta name="keywords" content="fastapi, mongodb, cookiecutter, python, async, rest api, backend template, motor, poetry, docker, microservices, api boilerplate">
+    <meta name="author" content="klee1611">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://klee1611.github.io/cookiecutter-fastapi-mongo/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://klee1611.github.io/cookiecutter-fastapi-mongo/">
+    <meta property="og:title" content="FastAPI MongoDB Template - Production-Ready Backend Boilerplate">
+    <meta property="og:description" content="Production-ready FastAPI and MongoDB cookiecutter template for building high-performance async RESTful APIs with Docker and Poetry 2.2.1.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/klee1611/cookiecutter-fastapi-mongo/main/screenshot/api_document.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://klee1611.github.io/cookiecutter-fastapi-mongo/">
+    <meta property="twitter:title" content="FastAPI MongoDB Template - Production-Ready Backend Boilerplate">
+    <meta property="twitter:description" content="Production-ready FastAPI and MongoDB cookiecutter template for building high-performance async RESTful APIs.">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/klee1611/cookiecutter-fastapi-mongo/main/screenshot/api_document.png">
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareSourceCode",
+      "name": "FastAPI MongoDB Cookiecutter Template",
+      "description": "Production-ready cookiecutter template for FastAPI backend services with MongoDB integration",
+      "url": "https://klee1611.github.io/cookiecutter-fastapi-mongo/",
+      "codeRepository": "https://github.com/klee1611/cookiecutter-fastapi-mongo",
+      "programmingLanguage": "Python",
+      "runtimePlatform": "Python 3.10+",
+      "author": {
+        "@type": "Person",
+        "name": "klee1611",
+        "url": "https://github.com/klee1611"
+      },
+      "keywords": "fastapi, mongodb, cookiecutter, python, async, rest api, backend template"
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: #ffffff;
+            background: #000000;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            color: #ffffff;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #333333;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+        
+        header p {
+            font-size: 1.25rem;
+            color: #b0b0b0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+        
+        .badges img {
+            height: 20px;
+        }
+        
+        .content {
+            background: #000000;
+            padding: 0;
+        }
+        
+        .quick-start {
+            background: #1a1a1a;
+            border: 1px solid #333333;
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .quick-start h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .quick-start p {
+            color: #d0d0d0;
+        }
+        
+        pre {
+            background: #1a1a1a;
+            color: #e0e0e0;
+            padding: 1.5rem;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        code {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+            color: #e0e0e0;
+        }
+        
+        inline-code {
+            background: #1a1a1a;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid #333333;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #333333;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            background: #222222;
+            border-color: #3b82f6;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+        
+        .feature-card h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .feature-card li {
+            color: #b0b0b0;
+            padding: 0.4rem 0;
+        }
+        
+        .feature-card li:before {
+            content: "✓ ";
+            color: #3b82f6;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        h2 {
+            color: #ffffff;
+            font-size: 2rem;
+            margin: 4rem 0 2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #333333;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        h3 {
+            color: #e0e0e0;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+        
+        p {
+            color: #b0b0b0;
+            margin: 1rem 0;
+        }
+        
+        li {
+            color: #b0b0b0;
+        }
+        
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        a:hover {
+            color: #60a5fa;
+        }
+        
+        section {
+            margin: 3rem 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #3b82f6;
+            color: #ffffff;
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0.75rem 0.5rem;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .cta-button:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+        }
+        
+        .cta-button.secondary:hover {
+            background: #3b82f6;
+            color: #ffffff;
+        }
+        
+        .screenshot {
+            margin: 3rem 0;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+        }
+        
+        .screenshot img {
+            width: 100%;
+            display: block;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #808080;
+            border-top: 1px solid #333333;
+            margin-top: 4rem;
+        }
+        
+        footer a {
+            color: #b0b0b0;
+        }
+        
+        footer a:hover {
+            color: #ffffff;
+        }
+        
+        ul {
+            padding-left: 1.5rem;
+        }
+        
+        ul li {
+            margin: 0.5rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            header {
+                padding: 3rem 0 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>FastAPI + MongoDB Template</h1>
+            <p>Production-ready cookiecutter template for building high-performance async backend services</p>
+            
+            <div class="badges">
+                <img src="https://img.shields.io/badge/Python-3.10+-3776ab.svg?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
+                <img src="https://img.shields.io/badge/Poetry-2.2.1-60a5fa.svg?style=flat-square" alt="Poetry 2.2.1">
+                <img src="https://img.shields.io/badge/MongoDB-4.4+-47A248.svg?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB 4.4+">
+                <img src="https://github.com/klee1611/cookiecutter-fastapi-mongo/actions/workflows/lint.yml/badge.svg" alt="Lint">
+                <img src="https://github.com/klee1611/cookiecutter-fastapi-mongo/actions/workflows/ci.yml/badge.svg" alt="CI Tests">
+                <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome">
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/klee1611/cookiecutter-fastapi-mongo" class="cta-button">View on GitHub</a>
+                <a href="#get-started" class="cta-button secondary">Get Started</a>
+            </div>
+        </header>
+        
+        <div class="content">
+            <section>
+                <h2>Overview</h2>
+                <p>A production-ready backend boilerplate for building high-performance RESTful APIs using FastAPI and Motor, an asynchronous driver for MongoDB. This template includes health checks, CRUD operations, automatic API documentation, Docker support, and uses Cookiecutter for rapid project generation.</p>
+            </section>
+            
+            <section class="screenshot">
+                <img src="../../screenshot/api_document.png" alt="Swagger API Documentation Screenshot" onerror="this.style.display='none'">
+            </section>
+            
+            <section id="get-started" class="quick-start">
+                <h3>⚠️ Getting Started - Required First Step</h3>
+                <p style="margin-bottom: 1rem; font-weight: 600;">Before using this template, you must execute the following command. This is not just a quick start guide—it's the mandatory first step to create your project.</p>
+                <pre><code>cookiecutter gh:klee1611/cookiecutter-fastapi-mongo</code></pre>
+                <p style="margin-top: 1rem;">After project creation, all dependencies will be automatically installed. All subsequent commands must be run inside the newly created project directory.</p>
+            </section>
+            
+            <section>
+                <h2>System Requirements</h2>
+                <ul>
+                    <li>Python 3.10 or higher</li>
+                    <li><a href="https://python-poetry.org/" target="_blank" rel="noopener">Poetry 2.2.1</a> - Python dependency management tool</li>
+                    <li><a href="https://github.com/cookiecutter/cookiecutter" target="_blank" rel="noopener">Cookiecutter</a> - Project templating tool</li>
+                    <li>Docker - For containerization</li>
+                    <li>GNU Make - For running build commands</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Key Features</h2>
+                <div class="features">
+                    <div class="feature-card">
+                        <h3>High Performance</h3>
+                        <ul>
+                            <li>Asynchronous FastAPI framework</li>
+                            <li>Motor async MongoDB driver</li>
+                            <li>Non-blocking I/O operations</li>
+                            <li>High concurrency support</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Developer Experience</h3>
+                        <ul>
+                            <li>Auto-generated Swagger documentation</li>
+                            <li>Pytest with async support</li>
+                            <li>Poetry 2.2.1 for dependency management</li>
+                            <li>Type hints with MyPy</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Production Ready</h3>
+                        <ul>
+                            <li>Dockerfile included</li>
+                            <li>Docker Compose configuration</li>
+                            <li>Multi-stage builds</li>
+                            <li>Health check endpoints</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Modern Stack</h3>
+                        <ul>
+                            <li>FastAPI 0.115+</li>
+                            <li>Motor 3.6+</li>
+                            <li>MongoDB 4.4+</li>
+                            <li>Python 3.10+</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Usage Guide</h2>
+                
+                <h3>Running Tests</h3>
+                <pre><code>make test</code></pre>
+                
+                <h3>Development Server</h3>
+                <pre><code>make dev</code></pre>
+                <p>This command starts a MongoDB container and launches the FastAPI development server with hot-reload enabled.</p>
+                
+                <h3>Building Docker Image</h3>
+                <pre><code>make docker-build</code></pre>
+                
+                <h3>Docker Compose</h3>
+                <pre><code>make docker-compose-up
+make docker-compose-down</code></pre>
+                
+                <h3>Accessing API Documentation</h3>
+                <p>Once the server is running, access the interactive API documentation at: <inline-code>http://localhost:8888/docs</inline-code></p>
+            </section>
+            
+            <section>
+                <h2>Project Structure</h2>
+                <pre><code>your-project/
+├── app/
+│   ├── api/           # API endpoints
+│   ├── dao/           # Data access layer
+│   ├── db/            # Database connection
+│   ├── models/        # Pydantic models
+│   └── conf/          # Configuration
+├── tests/             # Test cases
+├── docker-compose.yml
+├── Dockerfile
+├── pyproject.toml
+└── Makefile</code></pre>
+            </section>
+            
+            <section>
+                <h2>Contributing</h2>
+                <p>We welcome contributions! For major changes, please open an issue first to discuss what you would like to change. Pull requests are always appreciated.</p>
+                <div style="margin-top: 1.5rem;">
+                    <a href="https://github.com/klee1611/cookiecutter-fastapi-mongo/issues" class="cta-button secondary">Report an Issue</a>
+                    <a href="https://github.com/klee1611/cookiecutter-fastapi-mongo/pulls" class="cta-button secondary">Submit a Pull Request</a>
+                </div>
+            </section>
+            
+            <section>
+                <h2>License</h2>
+                <p>This project is licensed under the MIT License. See the <a href="https://github.com/klee1611/cookiecutter-fastapi-mongo/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a> file for details.</p>
+            </section>
+        </div>
+        
+        <footer>
+            <p>Created and maintained by <a href="https://github.com/klee1611" target="_blank" rel="noopener">klee1611</a></p>
+            <p style="margin-top: 0.75rem;">⭐ Star this project on <a href="https://github.com/klee1611/cookiecutter-fastapi-mongo" target="_blank" rel="noopener">GitHub</a> if you find it useful</p>
+        </footer>
+    </div>
+</body>
+</html>
