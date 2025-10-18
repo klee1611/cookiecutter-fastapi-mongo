@@ -17,8 +17,7 @@ async def connect_and_init_db():
     db_client = AsyncIOMotorClient(
         Config.app_settings.get('mongodb_url'),
         maxPoolSize=Config.app_settings.get('max_db_conn_count'),
-        minPoolSize=Config.app_settings.get('min_db_conn_count'),
-        uuidRepresentation='standard'
+        minPoolSize=Config.app_settings.get('min_db_conn_count')
     )
     logging.info('Connected to mongo.')
 

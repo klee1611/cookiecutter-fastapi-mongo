@@ -11,8 +11,7 @@ class MongoHandler():
         self.__db_name = db_name
         self.__collection_name = collection_name
         self.__db_client = AsyncIOMotorClient(
-            os.environ.get('TEST_MONGODB_URL'),
-            uuidRepresentation='standard'
+            os.environ.get('TEST_MONGODB_URL')
         )
 
     async def get_sample_resource(self, resource_id: UUID):
