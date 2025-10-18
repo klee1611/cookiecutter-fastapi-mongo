@@ -19,7 +19,7 @@ dev:
 		-p 27017:27017 \
 		-v $(shell pwd)/data:/data/db \
 		mongo:4.4
-	@env $(shell cat .env) poetry run gunicorn -k uvicorn.workers.UvicornWorker --reload --bind 0.0.0.0:8888 -w 4 app.server:app
+	@env $(shell cat .env) poetry run gunicorn -k uvicorn.workers.UvicornWorker --reload --bind 0.0.0.0:8888 -w 1 app.server:app
 
 docker-build:
 	@docker build -t $(IMAGE_NAME) .
