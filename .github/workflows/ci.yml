@@ -20,7 +20,7 @@ jobs:
       - name: Install Poetry and Cookiecutter
         run: |
           python -m pip install --upgrade pip
-          pip install poetry cookiecutter
+          python -m pip install poetry cookiecutter
       - name: Test Server Code
         run: make test-server-code
       - name: Test Docker Compose
