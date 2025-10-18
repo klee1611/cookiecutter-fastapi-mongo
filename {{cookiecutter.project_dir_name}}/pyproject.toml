@@ -3,19 +3,25 @@ name = "{{cookiecutter.app_name}}"
 version = "{{cookiecutter.app_version}}"
 description = ""
 authors = ["{{cookiecutter.author}}"]
+packages = [{include = "app"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-fastapi = "^0.75.1"
-motor = "^2.5.1"
-gunicorn = "^20.1.0"
+fastapi = "^0.115.0"
+motor = "^3.6.0"
+gunicorn = "^23.0.0"
 PyYAML = "^6.0"
-uvicorn = "^0.17.6"
+uvicorn = {extras = ["standard"], version = "^0.32.0"}
 
-[tool.poetry.dev-dependencies]
-pytest-asyncio = "^0.18.3"
-mypy = "^0.942"
-requests = "^2.27.1"
+[tool.poetry.group.dev.dependencies]
+pytest-asyncio = "^0.24.0"
+mypy = "^1.13.0"
+requests = "^2.32.0"
+httpx = "^0.27.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+norecursedirs = ["data", ".git", ".github"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

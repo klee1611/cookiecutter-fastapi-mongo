@@ -24,6 +24,5 @@ async def connect_and_init_db():
 
 async def close_db_connect():
     logging.info('Closing connection to mongo...')
-    global db_client
     db_client.close()
     logging.info('Mongo connection closed.')

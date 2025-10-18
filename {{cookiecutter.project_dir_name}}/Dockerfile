@@ -6,8 +6,7 @@ ENV PYTHONUNBUFFERED 1
 RUN adduser --disabled-password --gecos '' appuser
 WORKDIR /server
 
-RUN pip install --upgrade pip
-RUN pip install poetry
+RUN pip install --no-cache-dir --upgrade pip poetry poetry-plugin-export
 
 COPY pyproject.toml poetry.lock ./
 RUN poetry export --without-hashes --without dev -f requirements.txt -o requirements.txt && \
