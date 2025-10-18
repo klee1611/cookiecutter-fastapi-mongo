@@ -11,10 +11,9 @@ test:
 		--name mongodb \
 		-p 27017:27017 \
 		-v $(shell pwd)/data:/data/db \
-		mongo:4.4
-	@env $(shell cat .env) poetry run pytest -s -vv
-	@docker stop mongodb
-	@docker run --rm -v $(shell pwd)/data:/data alpine sh -c "rm -rf /data/*" || true
+		mongo:4.4; \
+	trap 'docker stop mongodb; docker run --rm -v $(shell pwd)/data:/data alpine sh -c "rm -rf /data/*" || true' EXIT; \
+	env $(shell cat .env) poetry run pytest -s -vv
 
 dev:
 	@docker run -itd --rm \
