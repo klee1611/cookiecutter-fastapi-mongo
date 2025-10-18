@@ -3,6 +3,9 @@
 VERSION := {{cookiecutter.app_version}}
 IMAGE_NAME := {{cookiecutter.docker_image_name}}:$(VERSION)
 
+# Detect docker compose command (v2 'docker compose' or v1 'docker-compose')
+DOCKER_COMPOSE := $(shell docker compose version > /dev/null 2>&1 && echo "docker compose" || echo "docker-compose")
+
 test:
 	@docker run -itd --rm \
 		--name mongodb \
@@ -25,7 +28,7 @@ docker-build:
 	@docker build -t $(IMAGE_NAME) .
 
 docker-compose-up:
-	@docker compose up -d --build --remove-orphans --force-recreate || docker-compose up -d --build --remove-orphans --force-recreate
+	@$(DOCKER_COMPOSE) up -d --build --remove-orphans --force-recreate
 
 docker-compose-down:
-	@docker compose down -v --remove-orphans --rmi all || docker-compose down -v --remove-orphans --rmi all
+	@$(DOCKER_COMPOSE) down -v --remove-orphans --rmi all
