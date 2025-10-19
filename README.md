@@ -26,7 +26,7 @@ A new backend project created with this boilerplate provides:
 
 ## Prerequisites
 - Python 3.10+
-- [Poetry 2.2.1](https://python-poetry.org/) installed
+- [Poetry 2.x](https://python-poetry.org/) installed
 - [Cookiecutter](https://github.com/cookiecutter/cookiecutter) installed
 - Docker installed
 - GNU Make
