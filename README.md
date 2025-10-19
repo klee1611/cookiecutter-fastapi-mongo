@@ -26,26 +26,25 @@ A new backend project created with this boilerplate provides:
 
 ## Prerequisites
 - Python 3.10+
-- [Poetry](https://python-poetry.org/) installed
+- [Poetry 2.x](https://python-poetry.org/) installed
 - [Cookiecutter](https://github.com/cookiecutter/cookiecutter) installed
 - Docker installed
 - GNU Make
 
 ## Getting Started
 
-### Create A New Service
-With [Cookiecutter](https://github.com/cookiecutter/cookiecutter),  
-you don't have to fork this project to create a new service.  
+### ⚠️ IMPORTANT: Create A New Service First
+**You must execute this command before any other usage.**  
+With [Cookiecutter](https://github.com/cookiecutter/cookiecutter), you don't have to fork this project to create a new service.
 
-Go to the directory where you want to place your new backend project,  
-and create the new project with:
+Go to the directory where you want to place your new backend project, and run:
 
 ```sh
 cookiecutter gh:klee1611/cookiecutter-fastapi-mongo
 ```
 
-After the project folder is created,  
-all packages required will be installed automatically.  
+After the project folder is created, all packages required will be installed automatically.  
+**All subsequent steps below should be run inside the newly created project directory.**  
 
 ### Edit Environment Variables
 Edit the `.env` file within the project folder.
@@ -75,5 +74,23 @@ This will create a MongoDB container as well.
 ### Check Swagger API Document
 Go to ` http://localhost:8888/docs`.
 
+## Website Deployment
+
+The project website is located in the `website/` directory.
+
+**Primary Method (Automatic):**  
+The website is automatically deployed to GitHub Pages via GitHub Actions when changes are pushed to `main` or `develop` branches. See `.github/workflows/deploy-pages.yml` for the workflow configuration.
+
+**Manual Deployment (Optional):**  
+For manual deployments or testing, you can use the npm gh-pages package:
+
+```sh
+cd website
+npm install
+npm run deploy
+```
+
+Note: Manual deployment should only be used for testing or emergency updates. The GitHub Actions workflow is the authoritative deployment method.
+
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
