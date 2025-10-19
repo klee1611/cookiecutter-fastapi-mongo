@@ -1,6 +1,7 @@
 {
 	"name": "cookiecutter-fastapi-mongo-website",
 	"version": "1.0.0",
+	"private": true,
 	"description": "Website for cookiecutter-fastapi-mongo template for restful backend API development",
 	"scripts": {
 		"deploy": "gh-pages -d public"
