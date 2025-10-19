@@ -76,13 +76,7 @@ Go to ` http://localhost:8888/docs`.
 
 ## Website Deployment
 
-The project website is located in the `website/` directory.
-
-**Primary Method (Automatic):**  
-The website is automatically deployed to GitHub Pages via GitHub Actions when changes are pushed to `main` or `develop` branches. See `.github/workflows/deploy-pages.yml` for the workflow configuration.
-
-**Manual Deployment (Optional):**  
-For manual deployments or testing, you can use the npm gh-pages package:
+The project website is located in the `website/` directory. To deploy updates to GitHub Pages:
 
 ```sh
 cd website
@@ -90,7 +84,7 @@ npm install
 npm run deploy
 ```
 
-Note: Manual deployment should only be used for testing or emergency updates. The GitHub Actions workflow is the authoritative deployment method.
+This will deploy the `website/public/` directory to the `gh-pages` branch using the `gh-pages` npm package.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
