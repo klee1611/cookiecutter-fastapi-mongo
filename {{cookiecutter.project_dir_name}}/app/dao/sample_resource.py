@@ -1,5 +1,5 @@
 from uuid import uuid4, UUID
-from datetime import datetime
+from datetime import datetime, UTC
 import logging
 from pymongo import ReturnDocument
 
@@ -20,8 +20,8 @@ async def create_sample_resource(
     new_sample_resource = SampleResourceDB(
         id=uuid4(),
         name=name,
-        create_time=datetime.utcnow(),
-        update_time=datetime.utcnow(),
+        create_time=datetime.now(UTC),
+        update_time=datetime.now(UTC),
         deleted=False,
     )
     logging.info(
@@ -68,7 +68,7 @@ async def update_sample_resource(
             ]},
             {'$set': {
                 **resource_data,
-                "update_time": datetime.utcnow(),
+                "update_time": datetime.now(UTC),
             }},
             return_document=ReturnDocument.AFTER,
         )
@@ -99,7 +99,7 @@ async def delete_sample_resource(
         ]},
         {'$set': {
             "deleted": True,
-            "update_time": datetime.utcnow(),
+            "update_time": datetime.now(UTC),
         }},
         return_document=ReturnDocument.AFTER,
     )
