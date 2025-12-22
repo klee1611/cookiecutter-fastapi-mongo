@@ -1,5 +1,5 @@
 # Backend FastAPI and MongoDB - Project Template
-![Python3.10](https://img.shields.io/badge/Python-3.10-brightgreen.svg?style=flat-square)
+![Python3.13](https://img.shields.io/badge/Python-3.13-brightgreen.svg?style=flat-square)
 ![MongoDB](https://img.shields.io/badge/MongoDB-3.6-brightgreen.svg?style=flat-square)
 ![uv](https://img.shields.io/badge/uv-package%20manager-blue.svg?style=flat-square)
 ![Lint](https://github.com/klee1611/cookiecutter-fastapi-mongo/actions/workflows/lint.yml/badge.svg)
