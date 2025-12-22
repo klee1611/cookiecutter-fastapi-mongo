@@ -81,7 +81,7 @@ async def update_sample_resource(
     sample_resource = await db_update_sample_resource(
         db,
         resource_id,
-        sample_resource_data.dict()
+        sample_resource_data.model_dump()
     )
     if None is sample_resource:
         raise UnprocessableError([])

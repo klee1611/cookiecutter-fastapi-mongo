@@ -13,7 +13,7 @@ test:
 		-v $(shell pwd)/data:/data/db \
 		mongo:4.4; \
 	trap 'docker stop mongodb; docker run --rm -v $(shell pwd)/data:/data alpine sh -c "rm -rf /data/*" || true' EXIT; \
-	env $(shell cat .env) poetry run pytest -s -vv
+	env $(shell cat .env) uv run pytest -s -vv
 
 dev:
 	@docker run -itd --rm \
@@ -21,7 +21,7 @@ dev:
 		-p 27017:27017 \
 		-v $(shell pwd)/data:/data/db \
 		mongo:4.4
-	@env $(shell cat .env) poetry run gunicorn -k uvicorn.workers.UvicornWorker --reload --bind 0.0.0.0:8888 -w 1 app.server:app
+	@env $(shell cat .env) uv run gunicorn -k uvicorn.workers.UvicornWorker --reload --bind 0.0.0.0:8888 -w 1 app.server:app
 
 docker-build:
 	@docker build -t $(IMAGE_NAME) .
