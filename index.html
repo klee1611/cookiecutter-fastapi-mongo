@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FastAPI MongoDB Template | Production-Ready Backend Boilerplate with Cookiecutter</title>
-    <meta name="description" content="Production-ready FastAPI and MongoDB cookiecutter template for building high-performance async RESTful APIs. Includes Docker, Poetry, pytest, and automatic Swagger documentation.">
-    <meta name="keywords" content="fastapi, mongodb, cookiecutter, python, async, rest api, backend template, motor, poetry, docker, microservices, api boilerplate">
+    <meta name="description" content="Production-ready FastAPI and MongoDB cookiecutter template for building high-performance async RESTful APIs. Includes Docker, uv, pytest, and automatic Swagger documentation.">
+    <meta name="keywords" content="fastapi, mongodb, cookiecutter, python, async, rest api, backend template, motor, uv, docker, microservices, api boilerplate">
     <meta name="author" content="klee1611">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://klee1611.github.io/cookiecutter-fastapi-mongo/">
@@ -14,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://klee1611.github.io/cookiecutter-fastapi-mongo/">
     <meta property="og:title" content="FastAPI MongoDB Template - Production-Ready Backend Boilerplate">
-    <meta property="og:description" content="Production-ready FastAPI and MongoDB cookiecutter template for building high-performance async RESTful APIs with Docker and Poetry.">
+    <meta property="og:description" content="Production-ready FastAPI and MongoDB cookiecutter template for building high-performance async RESTful APIs with Docker and uv.">
     <meta property="og:image" content="https://raw.githubusercontent.com/klee1611/cookiecutter-fastapi-mongo/main/screenshot/api_document.png">
     
     <!-- Twitter -->
@@ -34,7 +34,7 @@
       "url": "https://klee1611.github.io/cookiecutter-fastapi-mongo/",
       "codeRepository": "https://github.com/klee1611/cookiecutter-fastapi-mongo",
       "programmingLanguage": "Python",
-      "runtimePlatform": "Python 3.10+",
+      "runtimePlatform": "Python 3.10-3.14",
       "author": {
         "@type": "Person",
         "name": "klee1611",
@@ -347,8 +347,8 @@
             <p>Production-ready cookiecutter template for building high-performance async backend services</p>
             
             <div class="badges">
-                <img src="https://img.shields.io/badge/Python-3.10+-3776ab.svg?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
-                <img src="https://img.shields.io/badge/Poetry-2.x-60a5fa.svg?style=flat-square" alt="Poetry 2.x">
+                <img src="https://img.shields.io/badge/Python-3.10--3.14-3776ab.svg?style=flat-square&logo=python&logoColor=white" alt="Python 3.10-3.14">
+                <img src="https://img.shields.io/badge/uv-package%20manager-blue.svg?style=flat-square" alt="uv package manager">
                 <img src="https://img.shields.io/badge/MongoDB-4.4+-47A248.svg?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB 4.4+">
                 <img src="https://github.com/klee1611/cookiecutter-fastapi-mongo/actions/workflows/lint.yml/badge.svg" alt="Lint">
                 <img src="https://github.com/klee1611/cookiecutter-fastapi-mongo/actions/workflows/ci.yml/badge.svg" alt="CI Tests">
@@ -373,16 +373,42 @@
             
             <section id="get-started" class="quick-start">
                 <h3>⚠️ Getting Started - Required First Step</h3>
-                <p style="margin-bottom: 1rem; font-weight: 600;">Before using this template, you must execute the following command. This is not just a quick start guide—it's the mandatory first step to create your project.</p>
-                <pre><code>cookiecutter gh:klee1611/cookiecutter-fastapi-mongo</code></pre>
-                <p style="margin-top: 1rem;">After project creation, all dependencies will be automatically installed. All subsequent commands must be run inside the newly created project directory.</p>
+                
+                <h4>1. Install uv (Ultra-fast Python Package Manager)</h4>
+                <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                
+                <h4>2. Install Cookiecutter</h4>
+                <pre><code>pip install cookiecutter</code></pre>
+                
+                <h4>3. Choose Your Python Version Branch</h4>
+                <p style="margin-bottom: 1rem;">We support multiple Python versions with dedicated branches:</p>
+                <ul style="margin-bottom: 1rem;">
+                    <li><strong>uv-python3.10</strong> - Python 3.10 (LTS)</li>
+                    <li><strong>uv-python3.11</strong> - Python 3.11</li>
+                    <li><strong>uv-python3.12</strong> - Python 3.12</li>
+                    <li><strong>uv-python3.13</strong> - Python 3.13</li>
+                    <li><strong>uv-python3.14</strong> - Python 3.14 (Latest)</li>
+                </ul>
+                
+                <h4>4. Create Your Project</h4>
+                <p style="margin-bottom: 1rem; font-weight: 600;">Execute one of the following commands based on your preferred Python version:</p>
+                
+                <p><strong>For Python 3.14 (recommended):</strong></p>
+                <pre><code>cookiecutter gh:klee1611/cookiecutter-fastapi-mongo --checkout uv-python3.14</code></pre>
+                
+                <p><strong>For Python 3.12:</strong></p>
+                <pre><code>cookiecutter gh:klee1611/cookiecutter-fastapi-mongo --checkout uv-python3.12</code></pre>
+                
+                <p><strong>For other versions, replace with:</strong> uv-python3.10, uv-python3.11, or uv-python3.13</p>
+                
+                <p style="margin-top: 1rem;">After project creation, uv will automatically install all dependencies. All subsequent commands must be run inside the newly created project directory.</p>
             </section>
             
             <section>
                 <h2>System Requirements</h2>
                 <ul>
-                    <li>Python 3.10 or higher</li>
-                    <li><a href="https://python-poetry.org/" target="_blank" rel="noopener noreferrer">Poetry 2.x</a> - Python dependency management tool</li>
+                    <li>Python 3.10 - 3.14 (choose your version)</li>
+                    <li><a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener noreferrer">uv</a> - Ultra-fast Python package manager (10-100x faster than pip)</li>
                     <li><a href="https://github.com/cookiecutter/cookiecutter" target="_blank" rel="noopener noreferrer">Cookiecutter</a> - Project templating tool</li>
                     <li>Docker - For containerization</li>
                     <li>GNU Make - For running build commands</li>
@@ -407,7 +433,7 @@
                         <ul>
                             <li>Auto-generated Swagger documentation</li>
                             <li>Pytest with async support</li>
-                            <li>Poetry 2.x for dependency management</li>
+                            <li>uv for blazing-fast dependency management</li>
                             <li>Type hints with MyPy</li>
                         </ul>
                     </div>
@@ -428,7 +454,8 @@
                             <li>FastAPI 0.115+</li>
                             <li>Motor 3.6+</li>
                             <li>MongoDB 4.4+</li>
-                            <li>Python 3.10+</li>
+                            <li>Python 3.10 - 3.14</li>
+                            <li>uv package manager</li>
                         </ul>
                     </div>
                 </div>
