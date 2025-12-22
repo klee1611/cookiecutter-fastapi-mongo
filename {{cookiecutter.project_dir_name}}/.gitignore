@@ -5,7 +5,6 @@ __pycache__/
 
 # uv
 .venv/
-.python-version
 
 # Environment
 .env
