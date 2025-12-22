@@ -3,7 +3,7 @@ name = "{{cookiecutter.app_name}}"
 version = "{{cookiecutter.app_version}}"
 description = ""
 authors = [{name = "{{cookiecutter.author}}"}]
-requires-python = ">=3.10"
+requires-python = ">=3.14"
 dependencies = [
     "fastapi>=0.115.0",
     "motor>=3.6.0",
