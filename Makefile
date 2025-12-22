@@ -2,7 +2,7 @@
 
 test-server-code:
 	@cookiecutter . --no-input
-	@cd demo-project && make test && poetry env remove python3 || true
+	@cd demo-project && make test || true
 	@rm -rf demo-project || true
 
 test-dev-run:
@@ -12,7 +12,6 @@ test-dev-run:
 	@curl -s -o /dev/null -w "%{http_code}" http://localhost:8888/health | grep 200 && echo "OK"
 	@pkill -f "app.server:app"
 	@docker stop mongodb
-	@cd demo-project && poetry env remove python3 || true
 	@rm -rf demo-project || true
 
 test-docker-compose:
@@ -20,5 +19,5 @@ test-docker-compose:
 	@cd demo-project && make docker-compose-up
 	@sleep 5
 	@curl -s -o /dev/null -w "%{http_code}" http://localhost:8888/health | grep 200 && echo "OK"
-	@cd demo-project && make docker-compose-down && poetry env remove python3 || true
+	@cd demo-project && make docker-compose-down || true
 	@rm -rf demo-project || true

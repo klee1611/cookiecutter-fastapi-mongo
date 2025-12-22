@@ -1,6 +1,7 @@
 # Backend FastAPI and MongoDB - Project Template
 ![Python3.10](https://img.shields.io/badge/Python-3.10-brightgreen.svg?style=flat-square)
 ![MongoDB](https://img.shields.io/badge/MongoDB-3.6-brightgreen.svg?style=flat-square)
+![uv](https://img.shields.io/badge/uv-package%20manager-blue.svg?style=flat-square)
 ![Lint](https://github.com/klee1611/cookiecutter-fastapi-mongo/actions/workflows/lint.yml/badge.svg)
 ![CI Tests](https://github.com/klee1611/cookiecutter-fastapi-mongo/actions/workflows/ci.yml/badge.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
@@ -18,16 +19,21 @@ A new backend project created with this boilerplate provides:
 - [x] API testing with [pytest](https://docs.pytest.org/en/7.1.x/) and [pytest-asyncio](https://github.com/pytest-dev/pytest-asyncio).
 - [x] Dockerfile for containerization and docker-compose support.
 - [x] Easy creation of new backend services with [cookiecutter](https://github.com/cookiecutter/cookiecutter).
-- [x] Easy package menagement with [Poetry](https://python-poetry.org/).
+- [x] Fast and modern package management with [uv](https://docs.astral.sh/uv/).
 - [x] Health API for service health checking.
 - [x] Easy configuration with environment variables.
 - [x] Easy testing, develop running, docker build, docker-compose up and down with Makefile.
 - [x] Proper logging with ID masking.
 
+## 🚀 New: Migrated to uv!
+This template now uses [uv](https://docs.astral.sh/uv/) for blazing-fast dependency management (10-100x faster than Poetry)!
+
+**Existing users:** See [MIGRATION.md](MIGRATION.md) for migration guide.
+
 ## Prerequisites
 - Python 3.10+
-- [Poetry 2.x](https://python-poetry.org/) installed
-- [Cookiecutter](https://github.com/cookiecutter/cookiecutter) installed
+- [uv](https://docs.astral.sh/uv/) - Install with: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+- [Cookiecutter](https://github.com/cookiecutter/cookiecutter) - Install with: `pip install cookiecutter`
 - Docker installed
 - GNU Make
 
@@ -43,7 +49,7 @@ Go to the directory where you want to place your new backend project, and run:
 cookiecutter gh:klee1611/cookiecutter-fastapi-mongo
 ```
 
-After the project folder is created, all packages required will be installed automatically.  
+After the project folder is created, all packages required will be installed automatically with uv.  
 **All subsequent steps below should be run inside the newly created project directory.**  
 
 ### Edit Environment Variables
