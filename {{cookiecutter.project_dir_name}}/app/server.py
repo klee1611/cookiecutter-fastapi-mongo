@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
@@ -35,11 +37,17 @@ log_config = create_log_config('app/conf/logging.yaml')
 logging.config.dictConfig(log_config)
 
 # app
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    Config.app_settings_validate()
+    await connect_and_init_db()
+    try:
+        yield
+    finally:
+        await close_db_connect()
 
-app.add_event_handler("startup", Config.app_settings_validate)
-app.add_event_handler("startup", connect_and_init_db)
-app.add_event_handler("shutdown", close_db_connect)
+
+app = FastAPI(lifespan=lifespan)
 
 
 # openapi schema
