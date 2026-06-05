@@ -36,6 +36,7 @@ def create_log_config(log_path: str) -> dict:
 log_config = create_log_config('app/conf/logging.yaml')
 logging.config.dictConfig(log_config)
 
+
 # app
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
