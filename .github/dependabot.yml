@@ -10,12 +10,14 @@ updates:
       interval: "weekly"
 
   - package-ecosystem: "docker"
-    directory: "/{{cookiecutter.project_dir_name}}"
+    directories:
+      - "/{{cookiecutter.project_dir_name}}"
     schedule:
       interval: "weekly"
 
   - package-ecosystem: "uv"
-    directory: "/{{cookiecutter.project_dir_name}}"
+    directories:
+      - "/{{cookiecutter.project_dir_name}}"
     schedule:
       interval: "weekly"
 
