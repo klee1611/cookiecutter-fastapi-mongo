@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+# Restore project metadata in pyproject.toml.
+# The template uses valid placeholder values ("app", "0.1.0") so that
+# Dependabot can parse the file. Cookiecutter renders its variables inside
+# this hook before execution, so the replacements below produce real values.
+python3 - <<'PYEOF'
+with open("pyproject.toml", "r") as f:
+    content = f.read()
+content = content.replace('name = "app"', 'name = "{{cookiecutter.app_name}}"', 1)
+content = content.replace('version = "0.1.0"', 'version = "{{cookiecutter.app_version}}"', 1)
+with open("pyproject.toml", "w") as f:
+    f.write(content)
+PYEOF
+
 # Check if uv is installed
 if ! command -v uv &> /dev/null; then
     echo "⚠️  uv is not installed. Please install it first:"
