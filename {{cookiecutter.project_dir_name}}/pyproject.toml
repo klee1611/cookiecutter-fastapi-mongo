@@ -1,6 +1,6 @@
 [project]
-name = "{{cookiecutter.app_name}}"
-version = "{{cookiecutter.app_version}}"
+name = "app"
+version = "0.1.0"
 description = ""
 authors = [{name = "{{cookiecutter.author}}"}]
 requires-python = ">=3.14"
