@@ -9,7 +9,7 @@ dependencies = [
     "motor>=3.6.0",
     "gunicorn>=23.0.0",
     "PyYAML>=6.0",
-    "uvicorn[standard]>=0.52.1",
+    "uvicorn[standard]>=0.52.3",
 ]
 
 [project.optional-dependencies]
